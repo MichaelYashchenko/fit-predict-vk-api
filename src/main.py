@@ -4,6 +4,7 @@ from fastapi.middleware.cors import CORSMiddleware
 import uvicorn
 
 from src.schemas import RequestModel, ResponseModel
+from src.models.pipeline import predict
 
 app = FastAPI(
     title="fit-predict",
@@ -26,9 +27,10 @@ app.add_middleware(
     tags=["Fit-Predict"],
     response_model=ResponseModel
 )
-async def inference(input: RequestModel):
+async def inference(input_: RequestModel):
+    ans = predict(input_)
     return JSONResponse(
-        content=ResponseModel(tags=["Красота", "Мода", "Политика"]).model_dump(),
+        content=ans.model_dump(),
     )
 
 

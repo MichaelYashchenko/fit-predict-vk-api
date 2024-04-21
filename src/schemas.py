@@ -7,3 +7,4 @@ class RequestModel(BaseModel):
 
 class ResponseModel(BaseModel):
     tags: list[str]
+    key_words: dict[str, list[str]]
